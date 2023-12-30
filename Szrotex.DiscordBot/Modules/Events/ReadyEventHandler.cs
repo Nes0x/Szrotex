@@ -40,7 +40,7 @@ public class ReadyEventHandler : IGatewayEventHandler<GuildCreateEventArgs>
         await _gatewayClient.Rest.ModifyMessageAsync(
             _config.Ids.OnlinePlayersChannelId,
             _config.Ids.OnlinePlayersMessageId,
-            options => options.WithEmbeds(new [] {_embedCreator.CreateEmbed($"{_config.MessagesConfig.OnlinePlayersTitle} - {players.Length}", $"{_config.MessagesConfig.OnlinePlayersDescription} {formattedPlayers}")}));
+            options => options.WithEmbeds(new [] {_embedCreator.CreateEmbed($"{_config.MessagesConfig.OnlinePlayersTitle} - {players.Length}/16", $"{_config.MessagesConfig.OnlinePlayersDescription} {formattedPlayers}")}));
 
     }
 }
