@@ -27,5 +27,5 @@ jobs:
           cd ${{ secrets.NAME }}
           screen -X -S "${{ secrets.NAME }}" quit
           ${{ secrets.DOTNET }} build --configuration Release
-          cd bin/Release/${{ secrets.DOTNET_VERSION }}
+          cd ${{ secrets.PATH }}
           nohup screen -d -m -S ${{ secrets.NAME }} ${{ secrets.DOTNET }} ${{ secrets.NAME }}.dll ${{ secrets.TOKEN }}
