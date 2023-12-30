@@ -3,6 +3,7 @@ using NetCord.Hosting.Gateway;
 using Szrotex.DiscordBot.Api;
 using Szrotex.DiscordBot.Config;
 using Szrotex.DiscordBot.Creators;
+using System.Timers;
 
 namespace Szrotex.DiscordBot.Modules.Events;
 
@@ -25,7 +26,9 @@ public class ReadyEventHandler : IGatewayEventHandler<GuildCreateEventArgs>
     public ValueTask HandleAsync(GuildCreateEventArgs arg)
     {
         if (arg.GuildId != _config.Ids.GuildId) return default;
-        var timer = new Timer(_ => UpdateEmbedWithOnlinePlayersAsync(), null, TimeSpan.FromSeconds(0), TimeSpan.FromSeconds(60));
+        var timer = new Timer(60000);
+        timer.Elapsed += (sender, args) => UpdateEmbedWithOnlinePlayersAsync();
+        timer.Start();
         return default;
     }
 
