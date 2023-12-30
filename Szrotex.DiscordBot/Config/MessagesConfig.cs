@@ -9,4 +9,6 @@ public class MessagesConfig
     public string EmbedCreated { get; init; }
     public string FooterEmbed { get; init; }
     public string VerificationSucceed { get; init; }
+    public string OnlinePlayersTitle { get; init; }
+    public string OnlinePlayersDescription { get; init; }
 }

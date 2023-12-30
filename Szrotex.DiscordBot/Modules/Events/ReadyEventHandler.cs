@@ -11,20 +11,20 @@ public class ReadyEventHandler : IGatewayEventHandler<GuildCreateEventArgs>
 {
     private readonly IStatisticsDataProvider _statisticsDataProvider;
     private readonly GatewayClient _gatewayClient;
-    private readonly IdsConfig _idsConfig;
+    private readonly BotConfig _config;
     private readonly IEmbedCreator _embedCreator;
 
-    public ReadyEventHandler(GatewayClient gatewayClient, BotConfig botConfig, IEmbedCreator embedCreator, IStatisticsDataProvider statisticsDataProvider)
+    public ReadyEventHandler(GatewayClient gatewayClient, BotConfig config, IEmbedCreator embedCreator, IStatisticsDataProvider statisticsDataProvider)
     {
         _gatewayClient = gatewayClient;
         _embedCreator = embedCreator;
         _statisticsDataProvider = statisticsDataProvider;
-        _idsConfig = botConfig.Ids;
+        _config = config;
     }
 
     public ValueTask HandleAsync(GuildCreateEventArgs arg)
     {
-        if (arg.GuildId != 995654775297294386) return default;
+        if (arg.GuildId != _config.Ids.GuildId) return default;
         var timer = new Timer(_ => UpdateEmbedWithOnlinePlayersAsync(), null, TimeSpan.FromSeconds(0), TimeSpan.FromSeconds(60));
         return default;
     }
@@ -35,9 +35,9 @@ public class ReadyEventHandler : IGatewayEventHandler<GuildCreateEventArgs>
         var formattedPlayers = players.Length != 0 ? string.Join(", ", players) : "brak"; 
         
         await _gatewayClient.Rest.ModifyMessageAsync(
-            _idsConfig.OnlinePlayersChannelId,
-            _idsConfig.OnlinePlayersMessageId,
-            options => options.WithEmbeds(new [] {_embedCreator.CreateEmbed("Gracze online", $"Osoby obecne na serwerze: {formattedPlayers}")}));
+            _config.Ids.OnlinePlayersChannelId,
+            _config.Ids.OnlinePlayersMessageId,
+            options => options.WithEmbeds(new [] {_embedCreator.CreateEmbed(_config.MessagesConfig.OnlinePlayersTitle, $"{_config.MessagesConfig.OnlinePlayersDescription} {formattedPlayers}")}));
 
     }
 }
