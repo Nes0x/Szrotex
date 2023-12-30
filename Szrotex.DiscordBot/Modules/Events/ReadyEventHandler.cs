@@ -26,7 +26,7 @@ public class ReadyEventHandler : IGatewayEventHandler<GuildCreateEventArgs>
     public ValueTask HandleAsync(GuildCreateEventArgs arg)
     {
         if (arg.GuildId != _config.Ids.GuildId) return default;
-        var timer = new Timer(60000);
+        var timer = new System.Timers.Timer(60000);
         timer.Elapsed += (sender, args) => UpdateEmbedWithOnlinePlayersAsync();
         timer.Start();
         return default;
