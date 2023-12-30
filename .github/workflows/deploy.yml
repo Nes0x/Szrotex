@@ -28,4 +28,4 @@ jobs:
           screen -X -S "${{ secrets.NAME }}" quit
           ${{ secrets.DOTNET }} build --configuration Release
           cd ${{ secrets.PATH }}
-          nohup screen -d -m -S ${{ secrets.NAME }} ${{ secrets.DOTNET }} ${{ secrets.NAME }}.dll ${{ secrets.TOKEN }}
+          nohup screen -d -m -S ${{ secrets.NAME }} ${{ secrets.DOTNET }} ${{ secrets.PROJECT_NAME }}.dll ${{ secrets.TOKEN }}
