@@ -8,11 +8,13 @@ using NetCord.Hosting.Services.ApplicationCommands;
 using NetCord.Hosting.Services.Interactions;
 using NetCord.Services.ApplicationCommands;
 using NetCord.Services.Interactions;
+using Szrotex.DiscordBot;
 using Szrotex.DiscordBot.Api;
 using Szrotex.DiscordBot.Discord.Config;
 using Szrotex.DiscordBot.Discord.Embed;
 using Szrotex.DiscordBot.Discord.Parsers.Buttons;
 using Szrotex.DiscordBot.Discord.Parsers.Reactions;
+using Szrotex.DiscordBot.Factories;
 using Szrotex.DiscordBot.Handlers.Timers;
 using Szrotex.DiscordBot.Handlers.Wss;
 
@@ -30,6 +32,7 @@ host
         .AddSingleton<EmbedModifier>()
         .AddSingleton<OnlinePlayersTimer>()
         .AddSingleton<BeamngChatWss>()
+        .AddSingleton<BeamngEventDtoFactory>()
         .AddTransient<HttpClient>()
         .AddTransient<ApiWrapper>(provider =>
         {
