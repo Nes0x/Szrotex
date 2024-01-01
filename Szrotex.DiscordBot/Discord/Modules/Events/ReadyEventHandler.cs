@@ -24,7 +24,7 @@ public class ReadyEventHandler : IGatewayEventHandler<GuildCreateEventArgs>
     {
         if (arg.GuildId != _config.Ids.GuildId) return default;
         _onlinePlayersTimer.Start(TimeSpan.FromMinutes(1));
-        _beamngChatWss.Start("wss://szrotex.pl:25565");
+        _beamngChatWss.Start(_config.WssUrl);
         return default;
     }
 
