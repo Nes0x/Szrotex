@@ -28,8 +28,6 @@ public class BeamngEventDtoFactory
                         return CreateFromServerEvent(beamngEvent, "Gracz {0} zezłomował gruza.");
                     case "onVehicleSpawn": 
                         return CreateFromServerEvent(beamngEvent, "Gracz {0} postawił nowego gruza.");
-                    case "onVehicleEdited": 
-                        return CreateFromServerEvent(beamngEvent, "Gracz {0} zezłomował gruza.");
                     default:
                         return null;
                 }
