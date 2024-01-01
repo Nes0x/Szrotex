@@ -18,7 +18,8 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Parsers\" />
+      <Folder Include="Discord\" />
+      <Folder Include="Handlers\" />
     </ItemGroup>
 
     <ItemGroup>

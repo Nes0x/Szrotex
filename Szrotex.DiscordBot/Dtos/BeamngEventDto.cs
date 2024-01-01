@@ -1,18 +1,22 @@
-﻿namespace Szrotex.DiscordBot;
+﻿using Szrotex.DiscordBot.Models;
+
+namespace Szrotex.DiscordBot.Dtos;
 
 #nullable disable
 public class BeamngEventDto
 {
     public string Player { get; init; }
     public string Value { get; init; }
+    public string Event { get; init; }
     
     
-    public static implicit operator BeamngEventDto(BeamngEvent beamngEvent)
+    public static explicit operator BeamngEventDto(BeamngEvent beamngEvent)
     {
         return new BeamngEventDto
         {
             Player = beamngEvent.player,
-            Value = beamngEvent.value
+            Value = beamngEvent.value,
+            Event = beamngEvent.@event
         };
     }
 }

@@ -1,4 +1,4 @@
-﻿namespace Szrotex.DiscordBot;
+﻿namespace Szrotex.DiscordBot.Models;
 
 #nullable disable
 public class BeamngEvent

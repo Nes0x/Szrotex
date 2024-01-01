@@ -8,14 +8,16 @@ using NetCord.Hosting.Services.ApplicationCommands;
 using NetCord.Hosting.Services.Interactions;
 using NetCord.Services.ApplicationCommands;
 using NetCord.Services.Interactions;
-using Szrotex.DiscordBot;
 using Szrotex.DiscordBot.Api;
-using Szrotex.DiscordBot.Config;
-using Szrotex.DiscordBot.Embed;
-using Szrotex.DiscordBot.Parsers.Buttons;
-using Szrotex.DiscordBot.Parsers.Reactions;
-using Szrotex.DiscordBot.Timers;
-using WebSocketSharp.Server;
+using Szrotex.DiscordBot.Discord.Config;
+using Szrotex.DiscordBot.Discord.Embed;
+using Szrotex.DiscordBot.Discord.Parsers.Buttons;
+using Szrotex.DiscordBot.Discord.Parsers.Reactions;
+using Szrotex.DiscordBot.Handlers.Timers;
+using Szrotex.DiscordBot.Handlers.Wss;
+
+if (args.Length != 2)
+    throw new ArgumentException("You must provide two arguments, first - token and second - file name for config.");
 
 var assembly = typeof(Program).Assembly;
 var host = Host.CreateDefaultBuilder(args);
@@ -23,10 +25,11 @@ host
     .ConfigureServices(services => services.AddGatewayEventHandlers(assembly)
         .AddSingleton<ButtonsReader>()
         .AddSingleton<ReactionsReader>()
-        .AddSingleton(_ = BotConfig.Create())
+        .AddSingleton(_ = BotConfig.Create(args[1]))
         .AddSingleton<EmbedCreator>()
         .AddSingleton<EmbedModifier>()
         .AddSingleton<OnlinePlayersTimer>()
+        .AddSingleton<BeamngChatWss>()
         .AddTransient<HttpClient>()
         .AddTransient<ApiWrapper>(provider =>
         {
