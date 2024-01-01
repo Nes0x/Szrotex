@@ -21,9 +21,15 @@ public class BeamngEventDtoFactory
                 switch (beamngEvent.value)
                 {
                     case "onPlayerJoin":
-                        return CreateFromPlayerServerEvent(beamngEvent, "Gracz {0} wszedł na serwer.");
+                        return CreateFromServerEvent(beamngEvent, "Gracz {0} wszedł na serwer.");
                     case "onPlayerDisconnect":
-                        return CreateFromPlayerServerEvent(beamngEvent, "Gracz {0} wyszedł z serwera.");
+                        return CreateFromServerEvent(beamngEvent, "Gracz {0} wyszedł z serwera.");
+                    case "onVehicleReset":
+                        return CreateFromServerEvent(beamngEvent, "Gracz {0} zezłomował gruza.");
+                    case "onVehicleSpawn": 
+                        return CreateFromServerEvent(beamngEvent, "Gracz {0} postawił nowego gruza.");
+                    case "onVehicleEdited": 
+                        return CreateFromServerEvent(beamngEvent, "Gracz {0} zezłomował gruza.");
                     default:
                         return null;
                 }
@@ -32,7 +38,7 @@ public class BeamngEventDtoFactory
         }
     }
 
-    private BeamngEventDto CreateFromPlayerServerEvent(BeamngEvent beamngEvent, string message)
+    private BeamngEventDto CreateFromServerEvent(BeamngEvent beamngEvent, string message)
     {
         var beamngEventDto = new BeamngEventDto("Zdarzenie", string.Format(message, beamngEvent.player));
         return beamngEventDto;
