@@ -10,6 +10,7 @@ public abstract class WssHandler : IDisposable
     public void Start(string url)
     {
         _webSocket = new WebSocket(url);
+        _webSocket.SslConfiguration.EnabledSslProtocols = System.Security.Authentication.SslProtocols.Tls12;
         _webSocket.OnMessage += OnMessage;
         _webSocket.OnClose += OnClose;
         _webSocket.OnError += OnError;
