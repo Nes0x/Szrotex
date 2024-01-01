@@ -3,7 +3,7 @@ using NetCord.Rest;
 
 namespace Szrotex.DiscordBot.Parsers.Buttons;
 
-public class ButtonsReader : IButtonsReader
+public class ButtonsReader
 {
     public ActionRowProperties? ReadFromString(string? toRead)
     {

@@ -5,7 +5,7 @@ namespace Szrotex.DiscordBot.Config;
 #nullable disable
 public class BotConfig
 {
-    private const string ConfigFile = "appsettings.json";
+    private const string ConfigFile = "appsettings.Development.json";
 
     public string Status { get; init; }
     public string ApiUrl { get; init; }

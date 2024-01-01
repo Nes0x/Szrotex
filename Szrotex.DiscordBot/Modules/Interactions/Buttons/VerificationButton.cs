@@ -2,17 +2,17 @@
 using NetCord.Rest;
 using NetCord.Services.Interactions;
 using Szrotex.DiscordBot.Config;
-using Szrotex.DiscordBot.Creators;
+using Szrotex.DiscordBot.Embed;
 
 namespace Szrotex.DiscordBot.Modules.Interactions.Buttons;
 
 public class VerificationButton : InteractionModule<ButtonInteractionContext>
 {
-    private readonly IEmbedCreator _embedCreator;
+    private readonly EmbedCreator _embedCreator;
     private readonly BotConfig _config;
 
 
-    public VerificationButton(IEmbedCreator embedCreator, BotConfig config)
+    public VerificationButton(EmbedCreator embedCreator, BotConfig config)
     {
         _embedCreator = embedCreator;
         _config = config;

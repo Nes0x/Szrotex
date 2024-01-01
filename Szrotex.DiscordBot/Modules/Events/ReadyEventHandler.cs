@@ -1,46 +1,27 @@
 ﻿using NetCord.Gateway;
 using NetCord.Hosting.Gateway;
-using Szrotex.DiscordBot.Api;
 using Szrotex.DiscordBot.Config;
-using Szrotex.DiscordBot.Creators;
-using System.Timers;
+using Szrotex.DiscordBot.Timers;
 
 namespace Szrotex.DiscordBot.Modules.Events;
 
 [GatewayEvent(nameof(GatewayClient.GuildCreate))]
 public class ReadyEventHandler : IGatewayEventHandler<GuildCreateEventArgs>
 {
-    private readonly IStatisticsDataProvider _statisticsDataProvider;
-    private readonly GatewayClient _gatewayClient;
     private readonly BotConfig _config;
-    private readonly IEmbedCreator _embedCreator;
+    private readonly OnlinePlayersTimer _onlinePlayersTimer;
 
-    public ReadyEventHandler(GatewayClient gatewayClient, BotConfig config, IEmbedCreator embedCreator, IStatisticsDataProvider statisticsDataProvider)
+    public ReadyEventHandler(BotConfig config, OnlinePlayersTimer onlinePlayersTimer)
     {
-        _gatewayClient = gatewayClient;
-        _embedCreator = embedCreator;
-        _statisticsDataProvider = statisticsDataProvider;
         _config = config;
+        _onlinePlayersTimer = onlinePlayersTimer;
     }
 
     public ValueTask HandleAsync(GuildCreateEventArgs arg)
     {
         if (arg.GuildId != _config.Ids.GuildId) return default;
-        var timer = new System.Timers.Timer(60000);
-        timer.Elapsed += (sender, args) => UpdateEmbedWithOnlinePlayersAsync();
-        timer.Start();
+        _onlinePlayersTimer.Start(TimeSpan.FromMinutes(1));
         return default;
     }
 
-    private async Task UpdateEmbedWithOnlinePlayersAsync()
-    {
-        var players = (await _statisticsDataProvider.GetOnlinePlayersAsync()).ToArray();
-        var formattedPlayers = players.Length != 0 ? string.Join(", ", players) : "brak"; 
-        
-        await _gatewayClient.Rest.ModifyMessageAsync(
-            _config.Ids.OnlinePlayersChannelId,
-            _config.Ids.OnlinePlayersMessageId,
-            options => options.WithEmbeds(new [] {_embedCreator.CreateEmbed($"{_config.MessagesConfig.OnlinePlayersTitle} - {players.Length}/16", $"{_config.MessagesConfig.OnlinePlayersDescription} {formattedPlayers}")}));
-
-    }
 }

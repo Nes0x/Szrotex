@@ -1,6 +1,6 @@
 ﻿namespace Szrotex.DiscordBot.Api;
 
-public class ApiWrapper : IApiWrapper
+public class ApiWrapper
 {
     private readonly HttpClient _httpClient;
 

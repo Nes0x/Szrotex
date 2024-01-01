@@ -2,7 +2,7 @@ using NetCord.Rest;
 
 namespace Szrotex.DiscordBot.Parsers.Reactions;
 
-public class ReactionsReader : IReactionsReader
+public class ReactionsReader
 {
     public IEnumerable<ReactionEmojiProperties>? ReadFromString(string? toRead)
     {

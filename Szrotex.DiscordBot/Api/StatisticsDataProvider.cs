@@ -4,11 +4,11 @@ using System.Text.Json.Serialization;
 
 namespace Szrotex.DiscordBot.Api;
 
-public class StatisticsDataProvider : IStatisticsDataProvider
+public class StatisticsDataProvider
 {
-    private readonly IApiWrapper _api;
+    private readonly ApiWrapper _api;
 
-    public StatisticsDataProvider(IApiWrapper api)
+    public StatisticsDataProvider(ApiWrapper api)
     {
         _api = api;
     }

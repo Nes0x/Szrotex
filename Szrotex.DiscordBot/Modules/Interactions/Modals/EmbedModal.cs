@@ -2,7 +2,7 @@ using NetCord;
 using NetCord.Rest;
 using NetCord.Services.Interactions;
 using Szrotex.DiscordBot.Config;
-using Szrotex.DiscordBot.Creators;
+using Szrotex.DiscordBot.Embed;
 using Szrotex.DiscordBot.ModalModels;
 using Szrotex.DiscordBot.Parsers.Buttons;
 using Szrotex.DiscordBot.Parsers.Reactions;
@@ -11,13 +11,13 @@ namespace Szrotex.DiscordBot.Modules.Interactions.Modals;
 
 public class EmbedModal : InteractionModule<ModalSubmitInteractionContext>
 {
-    private readonly IButtonsReader _buttonsReader;
+    private readonly ButtonsReader _buttonsReader;
     private readonly BotConfig _config;
-    private readonly IEmbedCreator _embedCreator;
-    private readonly IReactionsReader _reactionsReader;
+    private readonly EmbedCreator _embedCreator;
+    private readonly ReactionsReader _reactionsReader;
 
-    public EmbedModal(IEmbedCreator embedCreator, BotConfig config, IButtonsReader buttonsReader,
-        IReactionsReader reactionsReader)
+    public EmbedModal(EmbedCreator embedCreator, BotConfig config, ButtonsReader buttonsReader,
+        ReactionsReader reactionsReader)
     {
         _embedCreator = embedCreator;
         _config = config;
