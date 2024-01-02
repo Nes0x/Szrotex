@@ -8,8 +8,8 @@ namespace Szrotex.DiscordBot.Discord.Modules.Interactions.Buttons;
 
 public class VerificationButton : InteractionModule<ButtonInteractionContext>
 {
-    private readonly EmbedCreator _embedCreator;
     private readonly BotConfig _config;
+    private readonly EmbedCreator _embedCreator;
 
 
     public VerificationButton(EmbedCreator embedCreator, BotConfig config)
@@ -26,6 +26,5 @@ public class VerificationButton : InteractionModule<ButtonInteractionContext>
         return InteractionCallback.Message(new InteractionMessageProperties()
             .AddEmbeds(_embedCreator.CreateEmbed(_config.MessagesConfig.SuccessTitle,
                 _config.MessagesConfig.VerificationSucceed)).WithFlags(MessageFlags.Ephemeral));
-        
     }
 }

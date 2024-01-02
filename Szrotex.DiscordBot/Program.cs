@@ -8,7 +8,6 @@ using NetCord.Hosting.Services.ApplicationCommands;
 using NetCord.Hosting.Services.Interactions;
 using NetCord.Services.ApplicationCommands;
 using NetCord.Services.Interactions;
-using Szrotex.DiscordBot;
 using Szrotex.DiscordBot.Api;
 using Szrotex.DiscordBot.Discord.Config;
 using Szrotex.DiscordBot.Discord.Embed;

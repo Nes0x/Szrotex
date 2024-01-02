@@ -6,5 +6,6 @@ public class IdsConfig
     public ulong OnlinePlayersMessageId { get; init; }
     public ulong OnlinePlayersChannelId { get; init; }
     public ulong BeamngChatChannelId { get; init; }
+    public ulong BeamngEventsChannelId { get; init; }
     public ulong GuildId { get; init; }
 }

@@ -1,4 +1,5 @@
 ﻿using System.Text.Json;
+using Szrotex.DiscordBot.Discord.Config;
 using Szrotex.DiscordBot.Dtos;
 using Szrotex.DiscordBot.Extensions;
 using Szrotex.DiscordBot.Models;
@@ -7,7 +8,14 @@ namespace Szrotex.DiscordBot.Factories;
 
 public class BeamngEventDtoFactory
 {
-    
+    private readonly BotConfig _config;
+
+    public BeamngEventDtoFactory(BotConfig config)
+    {
+        _config = config;
+    }
+
+
     public BeamngEventDto? CreateFromJson(string json)
     {
         var beamngEvent = JsonSerializer.Deserialize<BeamngEvent>(json);
@@ -34,18 +42,17 @@ public class BeamngEventDtoFactory
 
     private BeamngEventDto CreateFromPlayerServerEvent(BeamngEvent beamngEvent, string message)
     {
-        var beamngEventDto = new BeamngEventDto("Zdarzenie", string.Format(message, beamngEvent.player));
+        var beamngEventDto = new BeamngEventDto("Zdarzenie", string.Format(message, beamngEvent.player),
+            _config.Ids.BeamngEventsChannelId);
         return beamngEventDto;
     }
 
     private BeamngEventDto CreateFromChatEvent(BeamngEvent beamngEvent)
     {
-        List<string> messageWords = beamngEvent.value.Split(" ").ToList();
+        var messageWords = beamngEvent.value.Split(" ").ToList();
         messageWords.RemoveAt(0);
-        var beamngEventDto = new BeamngEventDto($"{beamngEvent.player}", messageWords.BuildStringFromWords());
+        var beamngEventDto = new BeamngEventDto($"{beamngEvent.player}", messageWords.BuildStringFromWords(),
+            _config.Ids.BeamngChatChannelId);
         return beamngEventDto;
     }
-    
-    
-    
 }

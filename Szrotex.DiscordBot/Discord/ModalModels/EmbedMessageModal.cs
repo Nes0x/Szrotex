@@ -9,10 +9,10 @@ public class EmbedMessageModal : BaseModal
     protected override string ModalTitle => "Stwórz embed";
 
     [ModalProperty(TextInputStyle.Short, Label = "Tytuł")]
-    public string Title { get; init; }
+    public string? Title { get; init; }
 
     [ModalProperty(TextInputStyle.Paragraph, Label = "Opis")]
-    public string Description { get; init; }
+    public string? Description { get; init; }
 
     [ModalProperty(TextInputStyle.Short, Label = "Kolor", Required = false)]
     public string? Color { get; init; }

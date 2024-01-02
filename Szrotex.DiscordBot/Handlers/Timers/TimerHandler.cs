@@ -7,6 +7,11 @@ public abstract class TimerHandler : IDisposable
 {
     private Timer? _timer;
 
+    public void Dispose()
+    {
+        _timer?.Dispose();
+    }
+
     public void Start(TimeSpan timeSpan)
     {
         _timer = new Timer(timeSpan);
@@ -15,9 +20,4 @@ public abstract class TimerHandler : IDisposable
     }
 
     protected abstract void DoAction(object? sender, ElapsedEventArgs args);
-    
-    public void Dispose()
-    {
-        _timer?.Dispose();
-    }
 }

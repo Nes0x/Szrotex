@@ -17,7 +17,6 @@ public class EmbedModifier
         await _client.Rest.ModifyMessageAsync(
             channelId,
             messageId,
-            options => options.WithEmbeds(new [] {toModify}));
-
+            options => options.WithEmbeds(new[] { toModify }));
     }
 }

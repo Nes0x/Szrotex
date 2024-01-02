@@ -7,7 +7,6 @@ namespace Szrotex.DiscordBot.Discord.Modules.SlashCommands;
 
 public class EmbedSlashCommand : ApplicationCommandModule<SlashCommandContext>
 {
-
     [SlashCommand("embed", "Stwórz embed.", DMPermission = false,
         DefaultGuildUserPermissions = Permissions.Administrator)]
     public InteractionCallback Handle(

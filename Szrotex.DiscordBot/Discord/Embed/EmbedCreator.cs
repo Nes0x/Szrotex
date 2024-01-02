@@ -1,9 +1,11 @@
 ﻿using System.Drawing;
 using NetCord.Rest;
 using Szrotex.DiscordBot.Discord.Config;
+using Color = NetCord.Color;
 
 namespace Szrotex.DiscordBot.Discord.Embed;
-using Color = NetCord.Color;
+
+using Color = Color;
 
 public class EmbedCreator
 {
@@ -26,7 +28,6 @@ public class EmbedCreator
         }
 
         var embed = new EmbedProperties()
-            .AddFields()
             .WithTitle(title)
             .WithDescription(description)
             .WithColor(discordColor)
@@ -40,6 +41,4 @@ public class EmbedCreator
     {
         return CreateEmbed(_config.MessagesConfig.ErrorTitle, description, "red");
     }
-    
-    
 }

@@ -33,12 +33,14 @@ public class EmbedModal : InteractionModule<ModalSubmitInteractionContext>
         var messageProperties = new MessageProperties().AddEmbeds(_embedCreator
             .CreateEmbed(embed.Title, embed.Description, embed.Color).WithImage(image).WithThumbnail(thumbnailImage)
         );
-        var buttons = _buttonsReader.ReadFromString(embed.Buttons);
+        ActionRowProperties? buttons = _buttonsReader.ReadFromString(embed.Buttons);
         if (buttons is not null) messageProperties.AddComponents(buttons);
         var message = await ((TextChannel)Context.Guild.Channels[id]).SendMessageAsync(
             messageProperties);
-        var reactions = _reactionsReader.ReadFromString(embed.Reactions);
-        if (reactions is not null) foreach (var reactionEmojiProperties in reactions) await message.AddReactionAsync(reactionEmojiProperties);
+        IEnumerable<ReactionEmojiProperties>? reactions = _reactionsReader.ReadFromString(embed.Reactions);
+        if (reactions is not null)
+            foreach (var reactionEmojiProperties in reactions)
+                await message.AddReactionAsync(reactionEmojiProperties);
         return InteractionCallback.Message(new InteractionMessageProperties()
             .AddEmbeds(_embedCreator.CreateEmbed(_config.MessagesConfig.SuccessTitle,
                 _config.MessagesConfig.EmbedCreated)).WithFlags(MessageFlags.Ephemeral));

@@ -9,9 +9,9 @@ namespace Szrotex.DiscordBot.Discord.Modules.Events;
 [GatewayEvent(nameof(GatewayClient.GuildCreate))]
 public class ReadyEventHandler : IGatewayEventHandler<GuildCreateEventArgs>
 {
+    private readonly BeamngChatWss _beamngChatWss;
     private readonly BotConfig _config;
     private readonly OnlinePlayersTimer _onlinePlayersTimer;
-    private readonly BeamngChatWss _beamngChatWss;
 
     public ReadyEventHandler(BotConfig config, OnlinePlayersTimer onlinePlayersTimer, BeamngChatWss beamngChatWss)
     {
@@ -27,5 +27,4 @@ public class ReadyEventHandler : IGatewayEventHandler<GuildCreateEventArgs>
         _beamngChatWss.Start(_config.WssUrl);
         return default;
     }
-
 }
