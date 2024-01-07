@@ -19,12 +19,12 @@ public class VerificationButton : InteractionModule<ButtonInteractionContext>
     }
 
     [Interaction("verification")]
-    public InteractionCallback Handle()
+    public InteractionCallback VerifyUser()
     {
         var guildUser = (GuildUser)Context.User;
         guildUser.AddRoleAsync(_config.Ids.VerificationRoleId);
         return InteractionCallback.Message(new InteractionMessageProperties()
-            .AddEmbeds(_embedCreator.Create(_config.MessagesConfig.SuccessTitle,
-                _config.MessagesConfig.VerificationSucceed)).WithFlags(MessageFlags.Ephemeral));
+            .AddEmbeds(_embedCreator.Create(_config.Messages.SuccessTitle,
+                _config.Messages.VerificationSucceed)).WithFlags(MessageFlags.Ephemeral));
     }
 }

@@ -15,9 +15,9 @@ public abstract class TimerHandler : IDisposable
     public void Start(TimeSpan timeSpan)
     {
         _timer = new Timer(timeSpan);
-        _timer.Elapsed += DoAction;
+        _timer.Elapsed += Execute;
         _timer.Start();
     }
 
-    protected abstract void DoAction(object? sender, ElapsedEventArgs args);
+    protected abstract void Execute(object? sender, ElapsedEventArgs args);
 }

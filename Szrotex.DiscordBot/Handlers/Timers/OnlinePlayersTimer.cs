@@ -22,7 +22,7 @@ public class OnlinePlayersTimer : TimerHandler
         _embedModifier = embedModifier;
     }
 
-    protected override void DoAction(object? sender, ElapsedEventArgs args)
+    protected override void Execute(object? sender, ElapsedEventArgs args)
     {
         UpdateEmbedWithOnlinePlayersAsync();
     }
@@ -30,10 +30,11 @@ public class OnlinePlayersTimer : TimerHandler
 
     private async Task UpdateEmbedWithOnlinePlayersAsync()
     {
-        string[] players = (await _statisticsDataProvider.FetchOnlinePlayersAsync()).ToArray();
-        string formattedPlayers = players.Length != 0 ? string.Join(", ", players) : "brak";
+        var messages = _config.Messages;
         var ids = _config.Ids;
-        var messages = _config.MessagesConfig;
+        
+        string[] players = (await _statisticsDataProvider.FetchOnlinePlayersAsync()).ToArray();
+        string formattedPlayers = players.Length != 0 ? string.Join(", ", players) : messages.NullPlayers;
         
         var toModify = _embedCreator.Create($"{messages.OnlinePlayersTitle} - {players.Length}/{ServerSlots}",
             $"{messages.OnlinePlayersDescription} {formattedPlayers}");

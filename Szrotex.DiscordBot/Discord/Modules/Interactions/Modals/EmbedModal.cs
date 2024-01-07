@@ -26,7 +26,7 @@ public class EmbedModal : InteractionModule<ModalSubmitInteractionContext>
     }
 
     [Interaction("embed")]
-    public async Task<InteractionCallback> HandleAsync(ulong id, string image, string thumbnailImage)
+    public async Task<InteractionCallback> SendEmbedToChannelAsync(ulong id, string image, string thumbnailImage)
     {
         var embed = new EmbedMessageModal();
         embed.Load(Context.Components);
@@ -42,7 +42,7 @@ public class EmbedModal : InteractionModule<ModalSubmitInteractionContext>
             foreach (var reactionEmojiProperties in reactions)
                 await message.AddReactionAsync(reactionEmojiProperties);
         return InteractionCallback.Message(new InteractionMessageProperties()
-            .AddEmbeds(_embedCreator.Create(_config.MessagesConfig.SuccessTitle,
-                _config.MessagesConfig.EmbedCreated)).WithFlags(MessageFlags.Ephemeral));
+            .AddEmbeds(_embedCreator.Create(_config.Messages.SuccessTitle,
+                _config.Messages.EmbedCreated)).WithFlags(MessageFlags.Ephemeral));
     }
 }

@@ -20,7 +20,7 @@ public class BeamngEventDtoFactory
     {
         var beamngEvent = JsonSerializer.Deserialize<BeamngEvent>(json);
         if (beamngEvent is null) throw new ArgumentNullException(nameof(json), "Typed argument is not correct.");
-
+        var messages = _config.Messages;
         switch (beamngEvent.@event)
         {
             case "CHAT":
@@ -29,13 +29,13 @@ public class BeamngEventDtoFactory
                 switch (beamngEvent.value)
                 {
                     case "onPlayerJoin":
-                        return CreateFromServerEvent(beamngEvent, "Gracz {0} wszedł na serwer.");
+                        return CreateFromServerEvent(beamngEvent, messages.PlayerJoinOnServer);
                     case "onPlayerDisconnect":
-                        return CreateFromServerEvent(beamngEvent, "Gracz {0} wyszedł z serwera.");
+                        return CreateFromServerEvent(beamngEvent,messages.PlayerDisconnectFromServer);
                     case "onVehicleReset":
-                        return CreateFromServerEvent(beamngEvent, "Gracz {0} zezłomował gruza.");
+                        return CreateFromServerEvent(beamngEvent, messages.VehicleReset);
                     case "onVehicleSpawn": 
-                        return CreateFromServerEvent(beamngEvent, "Gracz {0} postawił nowego gruza.");
+                        return CreateFromServerEvent(beamngEvent, messages.VehicleSpawn);
                     default:
                         return null;
                 }
@@ -46,7 +46,7 @@ public class BeamngEventDtoFactory
 
     private BeamngEventDto CreateFromServerEvent(BeamngEvent beamngEvent, string message)
     {
-        var beamngEventDto = new BeamngEventDto("Zdarzenie", string.Format(message, beamngEvent.player), _config.Ids.BeamngEventsChannelId);
+        var beamngEventDto = new BeamngEventDto(_config.Messages.EventEmbed, string.Format(message, beamngEvent.player), _config.Ids.BeamngEventsChannelId);
         return beamngEventDto;
     }
 

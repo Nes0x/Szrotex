@@ -11,7 +11,7 @@ public class BotConfig
     public IdsConfig Ids { get; init; }
     public ColorConfig NormalColor { get; init; }
     public ColorConfig ErrorColor { get; init; }
-    public MessagesConfig MessagesConfig { get; init; }
+    public MessagesConfig Messages { get; init; }
 
     public static BotConfig Create(string fileName)
     {

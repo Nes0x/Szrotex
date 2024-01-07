@@ -31,7 +31,7 @@ public class EmbedCreator
             .WithTitle(title)
             .WithDescription(description)
             .WithColor(discordColor)
-            .WithFooter(new EmbedFooterProperties().WithText(_config.MessagesConfig.FooterEmbed))
+            .WithFooter(new EmbedFooterProperties().WithText(_config.Messages.FooterEmbed))
             .WithTimestamp(DateTimeOffset.UtcNow);
 
         return embed;
@@ -39,6 +39,6 @@ public class EmbedCreator
 
     public EmbedProperties CreateError(string description)
     {
-        return Create(_config.MessagesConfig.ErrorTitle, description, "red");
+        return Create(_config.Messages.ErrorTitle, description, "red");
     }
 }

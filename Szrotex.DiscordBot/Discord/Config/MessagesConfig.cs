@@ -11,4 +11,10 @@ public class MessagesConfig
     public string VerificationSucceed { get; init; }
     public string OnlinePlayersTitle { get; init; }
     public string OnlinePlayersDescription { get; init; }
+    public string NullPlayers { get; init; }
+    public string EventEmbed { get; init; }
+    public string PlayerJoinOnServer { get; init; }
+    public string PlayerDisconnectFromServer { get; init; }
+    public string VehicleReset { get; init; }
+    public string VehicleSpawn { get; init; }
 }
