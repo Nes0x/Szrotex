@@ -11,6 +11,7 @@ public class OnlinePlayersTimer : TimerHandler
     private readonly EmbedCreator _embedCreator;
     private readonly EmbedModifier _embedModifier;
     private readonly StatisticsDataProvider _statisticsDataProvider;
+    private const int ServerSlots = 10;
 
     public OnlinePlayersTimer(StatisticsDataProvider statisticsDataProvider, BotConfig config,
         EmbedCreator embedCreator, EmbedModifier embedModifier)
@@ -33,8 +34,8 @@ public class OnlinePlayersTimer : TimerHandler
         string formattedPlayers = players.Length != 0 ? string.Join(", ", players) : "brak";
         var ids = _config.Ids;
         var messages = _config.MessagesConfig;
-
-        var toModify = _embedCreator.Create($"{messages.OnlinePlayersTitle} - {players.Length}/16",
+        
+        var toModify = _embedCreator.Create($"{messages.OnlinePlayersTitle} - {players.Length}/{ServerSlots}",
             $"{messages.OnlinePlayersDescription} {formattedPlayers}");
         await _embedModifier.ModifyAsync(ids.OnlinePlayersChannelId, ids.OnlinePlayersMessageId, toModify);
     }
