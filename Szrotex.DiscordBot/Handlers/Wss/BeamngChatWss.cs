@@ -25,6 +25,6 @@ public class BeamngChatWss : WssHandler
         if (beamngEventDto == null) return;
         _client.Rest.SendMessageAsync(beamngEventDto.ChannelId,
             new MessageProperties().WithEmbeds(new[]
-                { _embedCreator.CreateEmbed(beamngEventDto.Title, beamngEventDto.Message) }));
+                { _embedCreator.Create(beamngEventDto.Title, beamngEventDto.Message) }));
     }
 }

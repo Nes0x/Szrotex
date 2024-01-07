@@ -24,7 +24,7 @@ public class VerificationButton : InteractionModule<ButtonInteractionContext>
         var guildUser = (GuildUser)Context.User;
         guildUser.AddRoleAsync(_config.Ids.VerificationRoleId);
         return InteractionCallback.Message(new InteractionMessageProperties()
-            .AddEmbeds(_embedCreator.CreateEmbed(_config.MessagesConfig.SuccessTitle,
+            .AddEmbeds(_embedCreator.Create(_config.MessagesConfig.SuccessTitle,
                 _config.MessagesConfig.VerificationSucceed)).WithFlags(MessageFlags.Ephemeral));
     }
 }

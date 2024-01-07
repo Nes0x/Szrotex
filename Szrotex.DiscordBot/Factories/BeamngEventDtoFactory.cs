@@ -52,10 +52,19 @@ public class BeamngEventDtoFactory
     private BeamngEventDto CreateFromChatEvent(BeamngEvent beamngEvent)
     {
         List<string> messageWords = beamngEvent.value.Split(" ").ToList();
-        messageWords.RemoveAt(0);
-        var beamngEventDto = new BeamngEventDto($"{beamngEvent.player}", messageWords.BuildStringFromWords(), _config.Ids.BeamngEventsChannelId);
+        var correctWords = RemoveUnusedWords(messageWords); 
+        var beamngEventDto = new BeamngEventDto($"{beamngEvent.player}", correctWords.BuildStringFromWords(), _config.Ids.BeamngChatChannelId);
         return beamngEventDto;
     }
+
+
+    private static IEnumerable<string> RemoveUnusedWords(IEnumerable<string> words)
+    {
+        var result = words.ToList();
+        result.RemoveRange(0, 3);
+        return result;
+    }
+    
     
     
     

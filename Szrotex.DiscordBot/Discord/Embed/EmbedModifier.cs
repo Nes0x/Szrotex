@@ -12,7 +12,7 @@ public class EmbedModifier
         _client = client;
     }
 
-    public async Task ModifyEmbedAsync(ulong channelId, ulong messageId, EmbedProperties toModify)
+    public async Task ModifyAsync(ulong channelId, ulong messageId, EmbedProperties toModify)
     {
         await _client.Rest.ModifyMessageAsync(
             channelId,

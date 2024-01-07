@@ -12,7 +12,7 @@ public class StatisticsDataProvider
         _api = api;
     }
 
-    public async Task<IEnumerable<string>> GetOnlinePlayersAsync()
+    public async Task<IEnumerable<string>> FetchOnlinePlayersAsync()
     {
         string encodedPlayersData = await _api.GetMethodAsync("statistics.php?online_list");
         var playersJsonArray = JsonSerializer.Deserialize<JsonArray>(encodedPlayersData);

@@ -16,7 +16,7 @@ public class EmbedCreator
         _config = config;
     }
 
-    public EmbedProperties CreateEmbed(string title, string description, string? color = null)
+    public EmbedProperties Create(string title, string description, string? color = null)
     {
         var discordColor = new Color(_config.NormalColor.R, _config.NormalColor.G, _config.NormalColor.B);
         if (!string.IsNullOrWhiteSpace(color))
@@ -37,8 +37,8 @@ public class EmbedCreator
         return embed;
     }
 
-    public EmbedProperties CreateErrorEmbed(string description)
+    public EmbedProperties CreateError(string description)
     {
-        return CreateEmbed(_config.MessagesConfig.ErrorTitle, description, "red");
+        return Create(_config.MessagesConfig.ErrorTitle, description, "red");
     }
 }

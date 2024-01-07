@@ -29,13 +29,13 @@ public class OnlinePlayersTimer : TimerHandler
 
     private async Task UpdateEmbedWithOnlinePlayersAsync()
     {
-        string[] players = (await _statisticsDataProvider.GetOnlinePlayersAsync()).ToArray();
+        string[] players = (await _statisticsDataProvider.FetchOnlinePlayersAsync()).ToArray();
         string formattedPlayers = players.Length != 0 ? string.Join(", ", players) : "brak";
         var ids = _config.Ids;
         var messages = _config.MessagesConfig;
 
-        var toModify = _embedCreator.CreateEmbed($"{messages.OnlinePlayersTitle} - {players.Length}/16",
+        var toModify = _embedCreator.Create($"{messages.OnlinePlayersTitle} - {players.Length}/16",
             $"{messages.OnlinePlayersDescription} {formattedPlayers}");
-        await _embedModifier.ModifyEmbedAsync(ids.OnlinePlayersChannelId, ids.OnlinePlayersMessageId, toModify);
+        await _embedModifier.ModifyAsync(ids.OnlinePlayersChannelId, ids.OnlinePlayersMessageId, toModify);
     }
 }

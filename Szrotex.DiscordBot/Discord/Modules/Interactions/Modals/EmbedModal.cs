@@ -31,18 +31,18 @@ public class EmbedModal : InteractionModule<ModalSubmitInteractionContext>
         var embed = new EmbedMessageModal();
         embed.Load(Context.Components);
         var messageProperties = new MessageProperties().AddEmbeds(_embedCreator
-            .CreateEmbed(embed.Title, embed.Description, embed.Color).WithImage(image).WithThumbnail(thumbnailImage)
+            .Create(embed.Title!, embed.Description!, embed.Color).WithImage(image).WithThumbnail(thumbnailImage)
         );
         ActionRowProperties? buttons = _buttonsReader.ReadFromString(embed.Buttons);
         if (buttons is not null) messageProperties.AddComponents(buttons);
-        var message = await ((TextChannel)Context.Guild.Channels[id]).SendMessageAsync(
+        var message = await ((TextChannel)Context.Guild!.Channels[id]).SendMessageAsync(
             messageProperties);
         IEnumerable<ReactionEmojiProperties>? reactions = _reactionsReader.ReadFromString(embed.Reactions);
         if (reactions is not null)
             foreach (var reactionEmojiProperties in reactions)
                 await message.AddReactionAsync(reactionEmojiProperties);
         return InteractionCallback.Message(new InteractionMessageProperties()
-            .AddEmbeds(_embedCreator.CreateEmbed(_config.MessagesConfig.SuccessTitle,
+            .AddEmbeds(_embedCreator.Create(_config.MessagesConfig.SuccessTitle,
                 _config.MessagesConfig.EmbedCreated)).WithFlags(MessageFlags.Ephemeral));
     }
 }
