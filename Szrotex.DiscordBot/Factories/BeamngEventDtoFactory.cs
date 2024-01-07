@@ -1,4 +1,5 @@
 ﻿using System.Text.Json;
+using System.Web;
 using Szrotex.DiscordBot.Discord.Config;
 using Szrotex.DiscordBot.Dtos;
 using Szrotex.DiscordBot.Extensions;
@@ -51,7 +52,8 @@ public class BeamngEventDtoFactory
 
     private BeamngEventDto CreateFromChatEvent(BeamngEvent beamngEvent)
     {
-        List<string> messageWords = beamngEvent.value.Split(" ").ToList();
+        var decodedData = HttpUtility.HtmlDecode(beamngEvent.value);
+        List<string> messageWords = decodedData.Split(" ").ToList();
         var correctWords = RemoveUnusedWords(messageWords); 
         var beamngEventDto = new BeamngEventDto($"{beamngEvent.player}", correctWords.BuildStringFromWords(), _config.Ids.BeamngChatChannelId);
         return beamngEventDto;
