@@ -22,7 +22,7 @@ public class ReadyEventHandler : IGatewayEventHandler<GuildCreateEventArgs>
 
     public ValueTask HandleAsync(GuildCreateEventArgs arg)
     {
-        if (arg.GuildId != _config.Ids.GuildId) return default;
+        if (arg.GuildId != _config.Ids.Guild) return default;
         _onlinePlayersTimer.Start(TimeSpan.FromMinutes(1));
         _beamngChatWss.Start(_config.WssUrl);
         return default;

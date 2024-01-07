@@ -46,7 +46,7 @@ public class BeamngEventDtoFactory
 
     private BeamngEventDto CreateFromServerEvent(BeamngEvent beamngEvent, string message)
     {
-        var beamngEventDto = new BeamngEventDto(_config.Messages.EventEmbed, string.Format(message, beamngEvent.player), _config.Ids.BeamngEventsChannelId);
+        var beamngEventDto = new BeamngEventDto(_config.Messages.EventEmbed, string.Format(message, beamngEvent.player), _config.Ids.BeamngEventsChannel);
         return beamngEventDto;
     }
 
@@ -55,7 +55,7 @@ public class BeamngEventDtoFactory
         var decodedData = HttpUtility.HtmlDecode(beamngEvent.value);
         List<string> messageWords = decodedData.Split(" ").ToList();
         var correctWords = RemoveUnusedWords(messageWords); 
-        var beamngEventDto = new BeamngEventDto($"{beamngEvent.player}", correctWords.BuildStringFromWords(), _config.Ids.BeamngChatChannelId);
+        var beamngEventDto = new BeamngEventDto($"{beamngEvent.player}", correctWords.BuildStringFromWords(), _config.Ids.BeamngChatChannel);
         return beamngEventDto;
     }
 

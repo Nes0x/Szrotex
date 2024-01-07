@@ -18,7 +18,8 @@ public class EmbedCreator
 
     public EmbedProperties Create(string title, string description, string? color = null)
     {
-        var discordColor = new Color(_config.NormalColor.R, _config.NormalColor.G, _config.NormalColor.B);
+        var baseColor = _config.BaseColor;
+        var discordColor = new Color(baseColor.R, baseColor.G, baseColor.B);
         if (!string.IsNullOrWhiteSpace(color))
         {
             var colorFromName = (System.Drawing.Color)(new ColorConverter().ConvertFromString(color) ??

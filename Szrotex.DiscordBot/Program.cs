@@ -16,17 +16,26 @@ using Szrotex.DiscordBot.Discord.Parsers.Reactions;
 using Szrotex.DiscordBot.Factories;
 using Szrotex.DiscordBot.Handlers.Timers;
 using Szrotex.DiscordBot.Handlers.Wss;
+using Szrotex.DiscordBot.Models;
 
-if (args.Length != 2)
-    throw new ArgumentException("You must provide two arguments, first - token and second - file name for config.");
+if (args.Length != 1)
+    throw new ArgumentException("You must provide token as argument.");
 
 var assembly = typeof(Program).Assembly;
 var host = Host.CreateDefaultBuilder(args);
 host
-    .ConfigureServices(services => services.AddGatewayEventHandlers(assembly)
+    .ConfigureServices((context, services) =>
+        
+        services.AddGatewayEventHandlers(assembly)
         .AddSingleton<ButtonsReader>()
         .AddSingleton<ReactionsReader>()
-        .AddSingleton(_ = BotConfig.Create(args[1]))
+        .AddSingleton(_ =>
+        {   
+            var idsFile = context.HostingEnvironment.IsDevelopment() ?
+                new FileType("ids.Development", "json") : 
+                new FileType("ids", "json");
+            return BotConfig.Create(idsFile);
+        })
         .AddSingleton<EmbedCreator>()
         .AddSingleton<EmbedModifier>()
         .AddSingleton<OnlinePlayersTimer>()

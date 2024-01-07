@@ -2,10 +2,10 @@
 
 public class IdsConfig
 {
-    public ulong VerificationRoleId { get; init; }
-    public ulong OnlinePlayersMessageId { get; init; }
-    public ulong OnlinePlayersChannelId { get; init; }
-    public ulong BeamngChatChannelId { get; init; }
-    public ulong BeamngEventsChannelId { get; init; }
-    public ulong GuildId { get; init; }
+    public ulong VerificationRole { get; init; }
+    public ulong OnlinePlayersMessage { get; init; }
+    public ulong OnlinePlayersChannel { get; init; }
+    public ulong BeamngChatChannel { get; init; }
+    public ulong BeamngEventsChannel { get; init; }
+    public ulong Guild { get; init; }
 }

@@ -38,6 +38,6 @@ public class OnlinePlayersTimer : TimerHandler
         
         var toModify = _embedCreator.Create($"{messages.OnlinePlayersTitle} - {players.Length}/{ServerSlots}",
             $"{messages.OnlinePlayersDescription} {formattedPlayers}");
-        await _embedModifier.ModifyAsync(ids.OnlinePlayersChannelId, ids.OnlinePlayersMessageId, toModify);
+        await _embedModifier.ModifyAsync(ids.OnlinePlayersChannel, ids.OnlinePlayersMessage, toModify);
     }
 }
